@@ -13,7 +13,6 @@ import java.util.List;
 import com.xinghai.mybatis.generator.gradle.plugin.parse.ParserEntityResolver2;
 import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.Project;
-import org.gradle.internal.impldep.org.apache.commons.io.FileUtils;
 import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.*;
 import org.mybatis.generator.config.xml.MyBatisGeneratorConfigurationParser;

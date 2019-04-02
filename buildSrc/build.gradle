@@ -1,7 +1,10 @@
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'idea'
-
+plugins {
+    id "java"
+    id "maven"
+    id "idea"
+    id "com.gradle.plugin-publish" version "0.10.1"
+//    id "java-gradle-plugin"
+}
 
 group 'com.xinghai'
 version '1.0.1-SNAPSHOT'
@@ -42,6 +45,30 @@ artifacts {
 
 repositories {
     maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+}
+
+//gradlePlugin {
+//    plugins {
+//        greetingsPlugin {
+//            id = 'com.xinghai.mybatis.generator.gradle.plugin'
+//            implementationClass = 'com.xinghai.mybatis.generator.gradle.plugin.MybatisGeneratorPlugin'
+//        }
+//    }
+//}
+
+pluginBundle {
+    website = 'https://github.com/zhouxinghai/mybatis-generator-gradle-plugin.git/'
+    vcsUrl = 'https://github.com/zhouxinghai/mybatis-generator-gradle-plugin.git'
+    description = 'mybatis generator gradle plugin'
+    tags = ['mybatis', 'generator']
+
+
+    plugins {
+        mybatisGeneratorPlugin {
+            id = 'com.xinghai.mybatis.generator'
+            displayName = 'mybatis generator gradle plugin'
+        }
+    }
 }
 
 

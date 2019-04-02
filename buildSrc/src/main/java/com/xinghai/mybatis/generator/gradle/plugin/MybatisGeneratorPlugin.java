@@ -1,7 +1,5 @@
 package com.xinghai.mybatis.generator.gradle.plugin;
 
-import java.io.*;
-
 import org.gradle.api.Action;
 import org.gradle.api.Plugin;
 import org.gradle.api.Project;

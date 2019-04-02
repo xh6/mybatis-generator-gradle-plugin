@@ -6,19 +6,20 @@ import java.util.Date;
 import java.util.List;
 
 public class LinkQueueExample implements Serializable {
-    private static final long serialVersionUID = 1L;
 
-    protected String orderByClause;
+    private static final long           serialVersionUID = 1L;
 
-    protected boolean distinct;
+    protected            String         orderByClause;
 
-    protected List<Criteria> oredCriteria;
+    protected            boolean        distinct;
+
+    protected            List<Criteria> oredCriteria;
 
     /** 当前页 */
-    protected int pageNum;
+    protected            int            pageNum;
 
     /** 每页数据条数 */
-    protected int pageSize;
+    protected            int            pageSize;
 
     public LinkQueueExample() {
         oredCriteria = new ArrayList<Criteria>();
@@ -102,6 +103,7 @@ public class LinkQueueExample implements Serializable {
     }
 
     protected abstract static class GeneratedCriteria {
+
         protected List<Criterion> criteria;
 
         protected GeneratedCriteria() {
@@ -1511,11 +1513,12 @@ public class LinkQueueExample implements Serializable {
     }
 
     public static class Criterion {
-        private String condition;
 
-        private Object value;
+        private String  condition;
 
-        private Object secondValue;
+        private Object  value;
+
+        private Object  secondValue;
 
         private boolean noValue;
 
@@ -1525,7 +1528,7 @@ public class LinkQueueExample implements Serializable {
 
         private boolean listValue;
 
-        private String typeHandler;
+        private String  typeHandler;
 
         public String getCondition() {
             return condition;

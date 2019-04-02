@@ -3,69 +3,70 @@ package liangzhu.info.spider.mysql.domain;
 import java.io.Serializable;
 import java.util.Date;
 
- /** create by system from table link_queue(URL队列)  */
+/** create by system from table link_queue(URL队列) */
 public class LinkQueue implements Serializable {
+
     //ID(id)
-    private Long id;
+    private              Long    id;
 
     //任务id(task_id)
-    private String taskId;
+    private              String  taskId;
 
     //url id(link_id)
-    private String linkId;
+    private              String  linkId;
 
     //task内序号(sequence)
-    private Long sequence;
+    private              Long    sequence;
 
     //休眠时间(sleep_second)
-    private Integer sleepSecond;
+    private              Integer sleepSecond;
 
     //是否重新下载页面(refresh)
-    private Boolean refresh;
+    private              Boolean refresh;
 
     //页面解析处理器(page_extractor)
-    private String pageExtractor;
+    private              String  pageExtractor;
 
     //url(url)
-    private String url;
+    private              String  url;
 
     //GET,POST(method)
-    private String method;
+    private              String  method;
 
     //请求头(headers)
-    private String headers;
+    private              String  headers;
 
     //cookie(cookies)
-    private String cookies;
+    private              String  cookies;
 
     //请求参数编码(encoding)
-    private String encoding;
+    private              String  encoding;
 
     //请求类型(content_type)
-    private String contentType;
+    private              String  contentType;
 
     //body内容(body)
-    private String body;
+    private              String  body;
 
     //超时时间单位:秒(timeout)
-    private Integer timeout;
+    private              Integer timeout;
 
     //优先级(priority)
-    private Integer priority;
+    private              Integer priority;
 
     // 状态(0:待下载,1:下载中,-1:下载失败)(status)
-    private Integer status;
+    private              Integer status;
 
     //重试次数(retry_count)
-    private Boolean retryCount;
+    private              Boolean retryCount;
 
     //最大重试次数(max_retry)
-    private Boolean maxRetry;
+    private              Boolean maxRetry;
 
     //创建时间(create_time)
-    private Date createTime;
+    private              Date    createTime;
 
-    private static final long serialVersionUID = 1L;
+    private static final long    serialVersionUID = 1L;
 
     public Long getId() {
         return id;
