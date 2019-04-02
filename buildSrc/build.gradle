@@ -3,7 +3,6 @@ plugins {
     id "maven"
     id "idea"
     id "com.gradle.plugin-publish" version "0.10.1"
-//    id "java-gradle-plugin"
 }
 
 group 'com.xinghai'
@@ -47,14 +46,6 @@ repositories {
     maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
 }
 
-//gradlePlugin {
-//    plugins {
-//        greetingsPlugin {
-//            id = 'com.xinghai.mybatis.generator.gradle.plugin'
-//            implementationClass = 'com.xinghai.mybatis.generator.gradle.plugin.MybatisGeneratorPlugin'
-//        }
-//    }
-//}
 
 pluginBundle {
     website = 'https://github.com/zhouxinghai/mybatis-generator-gradle-plugin.git/'

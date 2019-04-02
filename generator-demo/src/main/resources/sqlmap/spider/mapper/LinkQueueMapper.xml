@@ -1,513 +1,513 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="liangzhu.info.spider.mysql.dao.LinkQueueDAO">
-    <resultMap id="BaseResultMap" type="liangzhu.info.spider.mysql.domain.LinkQueue">
-        <id column="id" jdbcType="BIGINT" property="id"/>
-        <result column="task_id" jdbcType="VARCHAR" property="taskId"/>
-        <result column="link_id" jdbcType="VARCHAR" property="linkId"/>
-        <result column="sequence" jdbcType="BIGINT" property="sequence"/>
-        <result column="sleep_second" jdbcType="INTEGER" property="sleepSecond"/>
-        <result column="refresh" jdbcType="BIT" property="refresh"/>
-        <result column="page_extractor" jdbcType="VARCHAR" property="pageExtractor"/>
-        <result column="url" jdbcType="VARCHAR" property="url"/>
-        <result column="method" jdbcType="VARCHAR" property="method"/>
-        <result column="headers" jdbcType="VARCHAR" property="headers"/>
-        <result column="cookies" jdbcType="VARCHAR" property="cookies"/>
-        <result column="encoding" jdbcType="VARCHAR" property="encoding"/>
-        <result column="content_type" jdbcType="VARCHAR" property="contentType"/>
-        <result column="body" jdbcType="VARCHAR" property="body"/>
-        <result column="timeout" jdbcType="INTEGER" property="timeout"/>
-        <result column="priority" jdbcType="BIT" property="priority"/>
-        <result column="status" jdbcType="BIT" property="status"/>
-        <result column="retry_count" jdbcType="BIT" property="retryCount"/>
-        <result column="max_retry" jdbcType="BIT" property="maxRetry"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
-    </resultMap>
-    <sql id="Example_Where_Clause">
-        <where>
-            <foreach collection="oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+  <resultMap id="BaseResultMap" type="liangzhu.info.spider.mysql.domain.LinkQueue">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="task_id" jdbcType="VARCHAR" property="taskId" />
+    <result column="link_id" jdbcType="VARCHAR" property="linkId" />
+    <result column="sequence" jdbcType="BIGINT" property="sequence" />
+    <result column="sleep_second" jdbcType="INTEGER" property="sleepSecond" />
+    <result column="refresh" jdbcType="BIT" property="refresh" />
+    <result column="page_extractor" jdbcType="VARCHAR" property="pageExtractor" />
+    <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="method" jdbcType="VARCHAR" property="method" />
+    <result column="headers" jdbcType="VARCHAR" property="headers" />
+    <result column="cookies" jdbcType="VARCHAR" property="cookies" />
+    <result column="encoding" jdbcType="VARCHAR" property="encoding" />
+    <result column="content_type" jdbcType="VARCHAR" property="contentType" />
+    <result column="body" jdbcType="VARCHAR" property="body" />
+    <result column="timeout" jdbcType="INTEGER" property="timeout" />
+    <result column="priority" jdbcType="BIT" property="priority" />
+    <result column="status" jdbcType="BIT" property="status" />
+    <result column="retry_count" jdbcType="BIT" property="retryCount" />
+    <result column="max_retry" jdbcType="BIT" property="maxRetry" />
+    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+  </resultMap>
+  <sql id="Example_Where_Clause">
+    <where>
+      <foreach collection="oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Update_By_Example_Where_Clause">
-        <where>
-            <foreach collection="example.oredCriteria" item="criteria" separator="or">
-                <if test="criteria.valid">
-                    <trim prefix="(" prefixOverrides="and" suffix=")">
-                        <foreach collection="criteria.criteria" item="criterion">
-                            <choose>
-                                <when test="criterion.noValue">
-                                    and ${criterion.condition}
-                                </when>
-                                <when test="criterion.singleValue">
-                                    and ${criterion.condition} #{criterion.value}
-                                </when>
-                                <when test="criterion.betweenValue">
-                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                                </when>
-                                <when test="criterion.listValue">
-                                    and ${criterion.condition}
-                                    <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                                        #{listItem}
-                                    </foreach>
-                                </when>
-                            </choose>
-                        </foreach>
-                    </trim>
-                </if>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause">
+    <where>
+      <foreach collection="example.oredCriteria" item="criteria" separator="or">
+        <if test="criteria.valid">
+          <trim prefix="(" prefixOverrides="and" suffix=")">
+            <foreach collection="criteria.criteria" item="criterion">
+              <choose>
+                <when test="criterion.noValue">
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue">
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue">
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue">
+                  and ${criterion.condition}
+                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
             </foreach>
-        </where>
-    </sql>
-    <sql id="Base_Column_List">
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List">
     id, task_id, link_id, sequence, sleep_second, refresh, page_extractor, url, method, 
     headers, cookies, encoding, content_type, body, timeout, priority, status, retry_count, 
     max_retry, create_time
   </sql>
-    <select id="selectByExample" parameterType="liangzhu.info.spider.mysql.domain.example.LinkQueueExample" resultMap="BaseResultMap">
-        select
-        <if test="distinct">
-            distinct
-        </if>
-        <include refid="Base_Column_List"/>
-        from link_queue
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
-        </if>
-        <if test="orderByClause != null">
-            order by ${orderByClause}
-        </if>
-        <if test="pageNum > 0 and pageSize > 0">
-            limit ${limitStart} , ${pageSize}
-        </if>
-    </select>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from link_queue
-        where id = #{id,jdbcType=BIGINT}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+  <select id="selectByExample" parameterType="liangzhu.info.spider.mysql.domain.example.LinkQueueExample" resultMap="BaseResultMap">
+    select
+    <if test="distinct">
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from link_queue
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null">
+      order by ${orderByClause}
+    </if>
+    <if test="pageNum > 0 and pageSize > 0">
+        limit ${limitStart} , ${pageSize}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from link_queue
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from link_queue
     where id = #{id,jdbcType=BIGINT}
   </delete>
-    <delete id="deleteByExample" parameterType="liangzhu.info.spider.mysql.domain.example.LinkQueueExample">
-        delete from link_queue
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
+  <delete id="deleteByExample" parameterType="liangzhu.info.spider.mysql.domain.example.LinkQueueExample">
+    delete from link_queue
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insertSelective" parameterType="liangzhu.info.spider.mysql.domain.LinkQueue">
+    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+      SELECT LAST_INSERT_ID()
+    </selectKey>
+    insert into link_queue
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        task_id,
+      </if>
+      <if test="linkId != null">
+        link_id,
+      </if>
+      <if test="sequence != null">
+        sequence,
+      </if>
+      <if test="sleepSecond != null">
+        sleep_second,
+      </if>
+      <if test="refresh != null">
+        refresh,
+      </if>
+      <if test="pageExtractor != null">
+        page_extractor,
+      </if>
+      <if test="url != null">
+        url,
+      </if>
+      <if test="method != null">
+        method,
+      </if>
+      <if test="headers != null">
+        headers,
+      </if>
+      <if test="cookies != null">
+        cookies,
+      </if>
+      <if test="encoding != null">
+        encoding,
+      </if>
+      <if test="contentType != null">
+        content_type,
+      </if>
+      <if test="body != null">
+        body,
+      </if>
+      <if test="timeout != null">
+        timeout,
+      </if>
+      <if test="priority != null">
+        priority,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="retryCount != null">
+        retry_count,
+      </if>
+      <if test="maxRetry != null">
+        max_retry,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="taskId != null">
+        #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="linkId != null">
+        #{linkId,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null">
+        #{sequence,jdbcType=BIGINT},
+      </if>
+      <if test="sleepSecond != null">
+        #{sleepSecond,jdbcType=INTEGER},
+      </if>
+      <if test="refresh != null">
+        #{refresh,jdbcType=BIT},
+      </if>
+      <if test="pageExtractor != null">
+        #{pageExtractor,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="headers != null">
+        #{headers,jdbcType=VARCHAR},
+      </if>
+      <if test="cookies != null">
+        #{cookies,jdbcType=VARCHAR},
+      </if>
+      <if test="encoding != null">
+        #{encoding,jdbcType=VARCHAR},
+      </if>
+      <if test="contentType != null">
+        #{contentType,jdbcType=VARCHAR},
+      </if>
+      <if test="body != null">
+        #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="timeout != null">
+        #{timeout,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null">
+        #{priority,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=BIT},
+      </if>
+      <if test="retryCount != null">
+        #{retryCount,jdbcType=BIT},
+      </if>
+      <if test="maxRetry != null">
+        #{maxRetry,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="liangzhu.info.spider.mysql.domain.example.LinkQueueExample" resultType="java.lang.Long">
+    select count(*) from link_queue
+    <if test="_parameter != null">
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map">
+    update link_queue
+    <set>
+      <if test="record.id != null">
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.taskId != null">
+        task_id = #{record.taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.linkId != null">
+        link_id = #{record.linkId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sequence != null">
+        sequence = #{record.sequence,jdbcType=BIGINT},
+      </if>
+      <if test="record.sleepSecond != null">
+        sleep_second = #{record.sleepSecond,jdbcType=INTEGER},
+      </if>
+      <if test="record.refresh != null">
+        refresh = #{record.refresh,jdbcType=BIT},
+      </if>
+      <if test="record.pageExtractor != null">
+        page_extractor = #{record.pageExtractor,jdbcType=VARCHAR},
+      </if>
+      <if test="record.url != null">
+        url = #{record.url,jdbcType=VARCHAR},
+      </if>
+      <if test="record.method != null">
+        method = #{record.method,jdbcType=VARCHAR},
+      </if>
+      <if test="record.headers != null">
+        headers = #{record.headers,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cookies != null">
+        cookies = #{record.cookies,jdbcType=VARCHAR},
+      </if>
+      <if test="record.encoding != null">
+        encoding = #{record.encoding,jdbcType=VARCHAR},
+      </if>
+      <if test="record.contentType != null">
+        content_type = #{record.contentType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.body != null">
+        body = #{record.body,jdbcType=VARCHAR},
+      </if>
+      <if test="record.timeout != null">
+        timeout = #{record.timeout,jdbcType=INTEGER},
+      </if>
+      <if test="record.priority != null">
+        priority = #{record.priority,jdbcType=BIT},
+      </if>
+      <if test="record.status != null">
+        status = #{record.status,jdbcType=BIT},
+      </if>
+      <if test="record.retryCount != null">
+        retry_count = #{record.retryCount,jdbcType=BIT},
+      </if>
+      <if test="record.maxRetry != null">
+        max_retry = #{record.maxRetry,jdbcType=BIT},
+      </if>
+      <if test="record.createTime != null">
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    <if test="_parameter != null">
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="liangzhu.info.spider.mysql.domain.LinkQueue">
+    update link_queue
+    <set>
+      <if test="taskId != null">
+        task_id = #{taskId,jdbcType=VARCHAR},
+      </if>
+      <if test="linkId != null">
+        link_id = #{linkId,jdbcType=VARCHAR},
+      </if>
+      <if test="sequence != null">
+        sequence = #{sequence,jdbcType=BIGINT},
+      </if>
+      <if test="sleepSecond != null">
+        sleep_second = #{sleepSecond,jdbcType=INTEGER},
+      </if>
+      <if test="refresh != null">
+        refresh = #{refresh,jdbcType=BIT},
+      </if>
+      <if test="pageExtractor != null">
+        page_extractor = #{pageExtractor,jdbcType=VARCHAR},
+      </if>
+      <if test="url != null">
+        url = #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="method != null">
+        method = #{method,jdbcType=VARCHAR},
+      </if>
+      <if test="headers != null">
+        headers = #{headers,jdbcType=VARCHAR},
+      </if>
+      <if test="cookies != null">
+        cookies = #{cookies,jdbcType=VARCHAR},
+      </if>
+      <if test="encoding != null">
+        encoding = #{encoding,jdbcType=VARCHAR},
+      </if>
+      <if test="contentType != null">
+        content_type = #{contentType,jdbcType=VARCHAR},
+      </if>
+      <if test="body != null">
+        body = #{body,jdbcType=VARCHAR},
+      </if>
+      <if test="timeout != null">
+        timeout = #{timeout,jdbcType=INTEGER},
+      </if>
+      <if test="priority != null">
+        priority = #{priority,jdbcType=BIT},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=BIT},
+      </if>
+      <if test="retryCount != null">
+        retry_count = #{retryCount,jdbcType=BIT},
+      </if>
+      <if test="maxRetry != null">
+        max_retry = #{maxRetry,jdbcType=BIT},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <insert id="batchInsertSelective" parameterType="java.util.List">
+    insert into link_queue
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="list[0].id!=null">
+        id,
+      </if>
+      <if test="list[0].taskId!=null">
+        task_id,
+      </if>
+      <if test="list[0].linkId!=null">
+        link_id,
+      </if>
+      <if test="list[0].sequence!=null">
+        sequence,
+      </if>
+      <if test="list[0].sleepSecond!=null">
+        sleep_second,
+      </if>
+      <if test="list[0].refresh!=null">
+        refresh,
+      </if>
+      <if test="list[0].pageExtractor!=null">
+        page_extractor,
+      </if>
+      <if test="list[0].url!=null">
+        url,
+      </if>
+      <if test="list[0].method!=null">
+        method,
+      </if>
+      <if test="list[0].headers!=null">
+        headers,
+      </if>
+      <if test="list[0].cookies!=null">
+        cookies,
+      </if>
+      <if test="list[0].encoding!=null">
+        encoding,
+      </if>
+      <if test="list[0].contentType!=null">
+        content_type,
+      </if>
+      <if test="list[0].body!=null">
+        body,
+      </if>
+      <if test="list[0].timeout!=null">
+        timeout,
+      </if>
+      <if test="list[0].priority!=null">
+        priority,
+      </if>
+      <if test="list[0].status!=null">
+        status,
+      </if>
+      <if test="list[0].retryCount!=null">
+        retry_count,
+      </if>
+      <if test="list[0].maxRetry!=null">
+        max_retry,
+      </if>
+      <if test="list[0].createTime!=null">
+        create_time,
+      </if>
+    </trim>
+     values 
+    <foreach collection="list" index="index" item="item" separator=",">
+      <trim prefix=" (" suffix=")" suffixOverrides=",">
+        <if test="item.id!=null">
+          #{item.id,jdbcType=BIGINT},
         </if>
-    </delete>
-    <insert id="insertSelective" parameterType="liangzhu.info.spider.mysql.domain.LinkQueue">
-        <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
-            SELECT LAST_INSERT_ID()
-        </selectKey>
-        insert into link_queue
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="taskId != null">
-                task_id,
-            </if>
-            <if test="linkId != null">
-                link_id,
-            </if>
-            <if test="sequence != null">
-                sequence,
-            </if>
-            <if test="sleepSecond != null">
-                sleep_second,
-            </if>
-            <if test="refresh != null">
-                refresh,
-            </if>
-            <if test="pageExtractor != null">
-                page_extractor,
-            </if>
-            <if test="url != null">
-                url,
-            </if>
-            <if test="method != null">
-                method,
-            </if>
-            <if test="headers != null">
-                headers,
-            </if>
-            <if test="cookies != null">
-                cookies,
-            </if>
-            <if test="encoding != null">
-                encoding,
-            </if>
-            <if test="contentType != null">
-                content_type,
-            </if>
-            <if test="body != null">
-                body,
-            </if>
-            <if test="timeout != null">
-                timeout,
-            </if>
-            <if test="priority != null">
-                priority,
-            </if>
-            <if test="status != null">
-                status,
-            </if>
-            <if test="retryCount != null">
-                retry_count,
-            </if>
-            <if test="maxRetry != null">
-                max_retry,
-            </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="taskId != null">
-                #{taskId,jdbcType=VARCHAR},
-            </if>
-            <if test="linkId != null">
-                #{linkId,jdbcType=VARCHAR},
-            </if>
-            <if test="sequence != null">
-                #{sequence,jdbcType=BIGINT},
-            </if>
-            <if test="sleepSecond != null">
-                #{sleepSecond,jdbcType=INTEGER},
-            </if>
-            <if test="refresh != null">
-                #{refresh,jdbcType=BIT},
-            </if>
-            <if test="pageExtractor != null">
-                #{pageExtractor,jdbcType=VARCHAR},
-            </if>
-            <if test="url != null">
-                #{url,jdbcType=VARCHAR},
-            </if>
-            <if test="method != null">
-                #{method,jdbcType=VARCHAR},
-            </if>
-            <if test="headers != null">
-                #{headers,jdbcType=VARCHAR},
-            </if>
-            <if test="cookies != null">
-                #{cookies,jdbcType=VARCHAR},
-            </if>
-            <if test="encoding != null">
-                #{encoding,jdbcType=VARCHAR},
-            </if>
-            <if test="contentType != null">
-                #{contentType,jdbcType=VARCHAR},
-            </if>
-            <if test="body != null">
-                #{body,jdbcType=VARCHAR},
-            </if>
-            <if test="timeout != null">
-                #{timeout,jdbcType=INTEGER},
-            </if>
-            <if test="priority != null">
-                #{priority,jdbcType=BIT},
-            </if>
-            <if test="status != null">
-                #{status,jdbcType=BIT},
-            </if>
-            <if test="retryCount != null">
-                #{retryCount,jdbcType=BIT},
-            </if>
-            <if test="maxRetry != null">
-                #{maxRetry,jdbcType=BIT},
-            </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <select id="countByExample" parameterType="liangzhu.info.spider.mysql.domain.example.LinkQueueExample" resultType="java.lang.Long">
-        select count(*) from link_queue
-        <if test="_parameter != null">
-            <include refid="Example_Where_Clause"/>
+        <if test="item.taskId!=null">
+          #{item.taskId,jdbcType=VARCHAR},
         </if>
-    </select>
-    <update id="updateByExampleSelective" parameterType="map">
-        update link_queue
-        <set>
-            <if test="record.id != null">
-                id = #{record.id,jdbcType=BIGINT},
-            </if>
-            <if test="record.taskId != null">
-                task_id = #{record.taskId,jdbcType=VARCHAR},
-            </if>
-            <if test="record.linkId != null">
-                link_id = #{record.linkId,jdbcType=VARCHAR},
-            </if>
-            <if test="record.sequence != null">
-                sequence = #{record.sequence,jdbcType=BIGINT},
-            </if>
-            <if test="record.sleepSecond != null">
-                sleep_second = #{record.sleepSecond,jdbcType=INTEGER},
-            </if>
-            <if test="record.refresh != null">
-                refresh = #{record.refresh,jdbcType=BIT},
-            </if>
-            <if test="record.pageExtractor != null">
-                page_extractor = #{record.pageExtractor,jdbcType=VARCHAR},
-            </if>
-            <if test="record.url != null">
-                url = #{record.url,jdbcType=VARCHAR},
-            </if>
-            <if test="record.method != null">
-                method = #{record.method,jdbcType=VARCHAR},
-            </if>
-            <if test="record.headers != null">
-                headers = #{record.headers,jdbcType=VARCHAR},
-            </if>
-            <if test="record.cookies != null">
-                cookies = #{record.cookies,jdbcType=VARCHAR},
-            </if>
-            <if test="record.encoding != null">
-                encoding = #{record.encoding,jdbcType=VARCHAR},
-            </if>
-            <if test="record.contentType != null">
-                content_type = #{record.contentType,jdbcType=VARCHAR},
-            </if>
-            <if test="record.body != null">
-                body = #{record.body,jdbcType=VARCHAR},
-            </if>
-            <if test="record.timeout != null">
-                timeout = #{record.timeout,jdbcType=INTEGER},
-            </if>
-            <if test="record.priority != null">
-                priority = #{record.priority,jdbcType=BIT},
-            </if>
-            <if test="record.status != null">
-                status = #{record.status,jdbcType=BIT},
-            </if>
-            <if test="record.retryCount != null">
-                retry_count = #{record.retryCount,jdbcType=BIT},
-            </if>
-            <if test="record.maxRetry != null">
-                max_retry = #{record.maxRetry,jdbcType=BIT},
-            </if>
-            <if test="record.createTime != null">
-                create_time = #{record.createTime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        <if test="_parameter != null">
-            <include refid="Update_By_Example_Where_Clause"/>
+        <if test="item.linkId!=null">
+          #{item.linkId,jdbcType=VARCHAR},
         </if>
-    </update>
-    <update id="updateByPrimaryKeySelective" parameterType="liangzhu.info.spider.mysql.domain.LinkQueue">
-        update link_queue
-        <set>
-            <if test="taskId != null">
-                task_id = #{taskId,jdbcType=VARCHAR},
-            </if>
-            <if test="linkId != null">
-                link_id = #{linkId,jdbcType=VARCHAR},
-            </if>
-            <if test="sequence != null">
-                sequence = #{sequence,jdbcType=BIGINT},
-            </if>
-            <if test="sleepSecond != null">
-                sleep_second = #{sleepSecond,jdbcType=INTEGER},
-            </if>
-            <if test="refresh != null">
-                refresh = #{refresh,jdbcType=BIT},
-            </if>
-            <if test="pageExtractor != null">
-                page_extractor = #{pageExtractor,jdbcType=VARCHAR},
-            </if>
-            <if test="url != null">
-                url = #{url,jdbcType=VARCHAR},
-            </if>
-            <if test="method != null">
-                method = #{method,jdbcType=VARCHAR},
-            </if>
-            <if test="headers != null">
-                headers = #{headers,jdbcType=VARCHAR},
-            </if>
-            <if test="cookies != null">
-                cookies = #{cookies,jdbcType=VARCHAR},
-            </if>
-            <if test="encoding != null">
-                encoding = #{encoding,jdbcType=VARCHAR},
-            </if>
-            <if test="contentType != null">
-                content_type = #{contentType,jdbcType=VARCHAR},
-            </if>
-            <if test="body != null">
-                body = #{body,jdbcType=VARCHAR},
-            </if>
-            <if test="timeout != null">
-                timeout = #{timeout,jdbcType=INTEGER},
-            </if>
-            <if test="priority != null">
-                priority = #{priority,jdbcType=BIT},
-            </if>
-            <if test="status != null">
-                status = #{status,jdbcType=BIT},
-            </if>
-            <if test="retryCount != null">
-                retry_count = #{retryCount,jdbcType=BIT},
-            </if>
-            <if test="maxRetry != null">
-                max_retry = #{maxRetry,jdbcType=BIT},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where id = #{id,jdbcType=BIGINT}
-    </update>
-    <insert id="batchInsertSelective" parameterType="java.util.List">
-        insert into link_queue
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="list[0].id!=null">
-                id,
-            </if>
-            <if test="list[0].taskId!=null">
-                task_id,
-            </if>
-            <if test="list[0].linkId!=null">
-                link_id,
-            </if>
-            <if test="list[0].sequence!=null">
-                sequence,
-            </if>
-            <if test="list[0].sleepSecond!=null">
-                sleep_second,
-            </if>
-            <if test="list[0].refresh!=null">
-                refresh,
-            </if>
-            <if test="list[0].pageExtractor!=null">
-                page_extractor,
-            </if>
-            <if test="list[0].url!=null">
-                url,
-            </if>
-            <if test="list[0].method!=null">
-                method,
-            </if>
-            <if test="list[0].headers!=null">
-                headers,
-            </if>
-            <if test="list[0].cookies!=null">
-                cookies,
-            </if>
-            <if test="list[0].encoding!=null">
-                encoding,
-            </if>
-            <if test="list[0].contentType!=null">
-                content_type,
-            </if>
-            <if test="list[0].body!=null">
-                body,
-            </if>
-            <if test="list[0].timeout!=null">
-                timeout,
-            </if>
-            <if test="list[0].priority!=null">
-                priority,
-            </if>
-            <if test="list[0].status!=null">
-                status,
-            </if>
-            <if test="list[0].retryCount!=null">
-                retry_count,
-            </if>
-            <if test="list[0].maxRetry!=null">
-                max_retry,
-            </if>
-            <if test="list[0].createTime!=null">
-                create_time,
-            </if>
-        </trim>
-        values
-        <foreach collection="list" index="index" item="item" separator=",">
-            <trim prefix=" (" suffix=")" suffixOverrides=",">
-                <if test="item.id!=null">
-                    #{item.id,jdbcType=BIGINT},
-                </if>
-                <if test="item.taskId!=null">
-                    #{item.taskId,jdbcType=VARCHAR},
-                </if>
-                <if test="item.linkId!=null">
-                    #{item.linkId,jdbcType=VARCHAR},
-                </if>
-                <if test="item.sequence!=null">
-                    #{item.sequence,jdbcType=BIGINT},
-                </if>
-                <if test="item.sleepSecond!=null">
-                    #{item.sleepSecond,jdbcType=INTEGER},
-                </if>
-                <if test="item.refresh!=null">
-                    #{item.refresh,jdbcType=BIT},
-                </if>
-                <if test="item.pageExtractor!=null">
-                    #{item.pageExtractor,jdbcType=VARCHAR},
-                </if>
-                <if test="item.url!=null">
-                    #{item.url,jdbcType=VARCHAR},
-                </if>
-                <if test="item.method!=null">
-                    #{item.method,jdbcType=VARCHAR},
-                </if>
-                <if test="item.headers!=null">
-                    #{item.headers,jdbcType=VARCHAR},
-                </if>
-                <if test="item.cookies!=null">
-                    #{item.cookies,jdbcType=VARCHAR},
-                </if>
-                <if test="item.encoding!=null">
-                    #{item.encoding,jdbcType=VARCHAR},
-                </if>
-                <if test="item.contentType!=null">
-                    #{item.contentType,jdbcType=VARCHAR},
-                </if>
-                <if test="item.body!=null">
-                    #{item.body,jdbcType=VARCHAR},
-                </if>
-                <if test="item.timeout!=null">
-                    #{item.timeout,jdbcType=INTEGER},
-                </if>
-                <if test="item.priority!=null">
-                    #{item.priority,jdbcType=BIT},
-                </if>
-                <if test="item.status!=null">
-                    #{item.status,jdbcType=BIT},
-                </if>
-                <if test="item.retryCount!=null">
-                    #{item.retryCount,jdbcType=BIT},
-                </if>
-                <if test="item.maxRetry!=null">
-                    #{item.maxRetry,jdbcType=BIT},
-                </if>
-                <if test="item.createTime!=null">
-                    #{item.createTime,jdbcType=TIMESTAMP},
-                </if>
-            </trim>
-        </foreach>
-    </insert>
+        <if test="item.sequence!=null">
+          #{item.sequence,jdbcType=BIGINT},
+        </if>
+        <if test="item.sleepSecond!=null">
+          #{item.sleepSecond,jdbcType=INTEGER},
+        </if>
+        <if test="item.refresh!=null">
+          #{item.refresh,jdbcType=BIT},
+        </if>
+        <if test="item.pageExtractor!=null">
+          #{item.pageExtractor,jdbcType=VARCHAR},
+        </if>
+        <if test="item.url!=null">
+          #{item.url,jdbcType=VARCHAR},
+        </if>
+        <if test="item.method!=null">
+          #{item.method,jdbcType=VARCHAR},
+        </if>
+        <if test="item.headers!=null">
+          #{item.headers,jdbcType=VARCHAR},
+        </if>
+        <if test="item.cookies!=null">
+          #{item.cookies,jdbcType=VARCHAR},
+        </if>
+        <if test="item.encoding!=null">
+          #{item.encoding,jdbcType=VARCHAR},
+        </if>
+        <if test="item.contentType!=null">
+          #{item.contentType,jdbcType=VARCHAR},
+        </if>
+        <if test="item.body!=null">
+          #{item.body,jdbcType=VARCHAR},
+        </if>
+        <if test="item.timeout!=null">
+          #{item.timeout,jdbcType=INTEGER},
+        </if>
+        <if test="item.priority!=null">
+          #{item.priority,jdbcType=BIT},
+        </if>
+        <if test="item.status!=null">
+          #{item.status,jdbcType=BIT},
+        </if>
+        <if test="item.retryCount!=null">
+          #{item.retryCount,jdbcType=BIT},
+        </if>
+        <if test="item.maxRetry!=null">
+          #{item.maxRetry,jdbcType=BIT},
+        </if>
+        <if test="item.createTime!=null">
+          #{item.createTime,jdbcType=TIMESTAMP},
+        </if>
+      </trim>
+    </foreach>
+  </insert>
 </mapper>
