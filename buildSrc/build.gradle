@@ -1,0 +1,79 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'idea'
+
+
+group 'com.xinghai'
+version '1.0.1-SNAPSHOT'
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+[compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, "seconds"
+}
+
+
+configurations {
+    provided
+    compile.extendsFrom provided
+    deployerJars
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
+}
+
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+    archives sourcesJar
+}
+
+
+repositories {
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+}
+
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            configuration = configurations.deployerJars
+            snapshotRepository(url: "http://192.168.66.9:8081/nexus/repository/maven-snapshots/") {
+                authentication(userName: "admin", password: "admin123")
+            }
+            repository(url: "http://192.168.66.9:8081/nexus/repository/maven-releases/") {
+                authentication(userName: "admin", password: "admin123")
+            }
+        }
+    }
+}
+
+dependencies {
+    compile gradleApi()
+    compile localGroovy()
+    compile "org.slf4j:slf4j-api:1.7.25"
+    compile "org.mybatis.generator:mybatis-generator-core:1.3.7"
+    compile "mysql:mysql-connector-java:5.1.38"
+    compile "org.apache.commons:commons-lang3:3.7"
+    compile "org.dom4j:dom4j:2.0.0"
+    compile "com.alibaba:fastjson:1.2.44"
+
+    testCompile "commons-io:commons-io:2.6"
+    testCompile "junit:junit:4.12"
+    testCompile "org.codehaus.groovy:groovy-all:2.4.6"
+    testCompile "ch.qos.logback:logback-classic:1.2.3"
+    testCompile "org.slf4j:log4j-over-slf4j:1.7.25"
+    testCompile "org.slf4j:jcl-over-slf4j:1.7.25"
+    testCompile group: 'junit', name: 'junit', version: '4.12'
+}

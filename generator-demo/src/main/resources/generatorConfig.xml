@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "/project/mybatis-generator/src/main/resources/mybatis-generator-config_1_0_new.dtd">
+
+<generatorConfiguration>
+    <context id="zhouxinghai">
+        <property name="server" value="192.168.66.4:3306"/>
+        <property name="username" value="root"/>
+        <property name="passowrd" value="123456"/>
+        <property name="database" value="spider2"/>
+        <property name="dao.module" value="."/>
+        <property name="dao.package" value="liangzhu.info.spider.mysql.dao.mapper"/>
+        <property name="sqlmap.package" value="sqlmap.spider.mapper"/>
+        <property name="domain.module" value="."/>
+        <property name="domain.package" value="liangzhu.info.spider.mysql.domain"/>
+
+        <!--Url队列-->
+        <table tableName="link_queue">
+            <generatedKey column="id" sqlStatement="MySql" identity="true"/>
+            <columnOverride column="priority" javaType="java.lang.Integer"/>
+            <columnOverride column="status" javaType="java.lang.Integer"/>
+            <columnOverride column="retryCount" javaType="java.lang.Integer"/>
+            <columnOverride column="maxRetry" javaType="java.lang.Integer"/>
+        </table>
+
+    </context>
+</generatorConfiguration>
