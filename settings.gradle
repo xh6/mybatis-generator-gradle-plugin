@@ -1,4 +1,2 @@
 rootProject.name = 'mybatis-generator-gradle-plugin'
-include 'buildSrc'
-include 'generator-demo'
 

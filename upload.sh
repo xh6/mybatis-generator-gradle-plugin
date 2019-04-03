@@ -1,4 +1,4 @@
 #!/bin/sh
-gradle buildSrc:upload  -x test --info
+gradle upload  -x test --info
 
 
