@@ -61,10 +61,12 @@ uploadArchives {
             repository(url: "http://${nexus_url}/nexus/content/repositories/releases/") {
                 authentication(userName: "${nexus_username}", password: "${nexus_password}")
             }
+            pom.version = "$project.version"
+            pom.artifactId = "mybatis-generator-gradle-plugin"
+            pom.groupId = "$project.group"
         }
     }
 }
-
 
 
 dependencies {
