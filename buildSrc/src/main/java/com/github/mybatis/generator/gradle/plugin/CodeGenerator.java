@@ -1,4 +1,4 @@
-package com.xinghai.mybatis.generator.gradle.plugin;
+package com.github.mybatis.generator.gradle.plugin;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -10,7 +10,7 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.xinghai.mybatis.generator.gradle.plugin.parse.ParserEntityResolver2;
+import com.github.mybatis.generator.gradle.plugin.parse.ParserEntityResolver2;
 import org.apache.commons.lang3.StringUtils;
 import org.gradle.api.Project;
 import org.mybatis.generator.api.MyBatisGenerator;

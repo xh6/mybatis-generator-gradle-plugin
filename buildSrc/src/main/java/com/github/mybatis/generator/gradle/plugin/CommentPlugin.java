@@ -1,4 +1,4 @@
-package com.xinghai.mybatis.generator.gradle.plugin;
+package com.github.mybatis.generator.gradle.plugin;
 
 import java.sql.*;
 import java.text.MessageFormat;

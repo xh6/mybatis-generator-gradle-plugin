@@ -1,4 +1,4 @@
-package com.xinghai.mybatis.generator.gradle.plugin;
+package com.github.mybatis.generator.gradle.plugin;
 
 import java.io.File;
 import java.util.ArrayList;

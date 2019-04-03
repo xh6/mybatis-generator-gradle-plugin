@@ -4,7 +4,7 @@
 
 <generatorConfiguration>
     <context id="zhouxinghai">
-        <property name="server" value="192.168.66.4:3306"/>
+        <property name="server" value="mysql.me:3306"/>
         <property name="username" value="root"/>
         <property name="passowrd" value="123456"/>
         <property name="database" value="spider2"/>
