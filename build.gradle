@@ -5,9 +5,8 @@ plugins {
     id "com.gradle.plugin-publish" version "0.10.1"
 }
 
-group 'com.xinghai'
-version '1.0.2-SNAPSHOT'
-
+group 'com.github'
+version '1.2-SNAPSHOT'
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -42,55 +41,32 @@ artifacts {
     archives sourcesJar
 }
 
+ext {
+    nexus_url = "maven.me:8081"
+    nexus_username = "admin"
+    nexus_password = "admin123"
+}
 
 repositories {
-    maven { url "http://maven.aliyun.com/nexus/content/groups/public/" }
+    maven { url "http://${nexus_url}/nexus/content/groups/public/" }
 }
-
-
-pluginBundle {
-    website = 'https://github.com/zhouxinghai/mybatis-generator-gradle-plugin.git/'
-    vcsUrl = 'https://github.com/zhouxinghai/mybatis-generator-gradle-plugin.git'
-    description = 'mybatis generator gradle plugin'
-    tags = ['mybatis', 'generator']
-
-
-    plugins {
-        mybatisGeneratorPlugin {
-            id = 'com.xinghai.mybatis.generator'
-            displayName = 'mybatis generator gradle plugin'
-        }
-    }
-}
-
 
 uploadArchives {
     repositories {
         mavenDeployer {
             configuration = configurations.deployerJars
-            snapshotRepository(url: "http://192.168.5.252:8081/nexus/content/repositories/snapshots/") {
-                authentication(userName: "admin", password: "admin123")
+            snapshotRepository(url: "http://${nexus_url}/nexus/content/repositories/snapshots/") {
+                authentication(userName: "${nexus_username}", password: "${nexus_password}")
             }
-            repository(url: "http://192.168.5.252:8081/nexus/content/repositories/releases/") {
-                authentication(userName: "admin", password: "admin123")
+            repository(url: "http://${nexus_url}/nexus/content/repositories/releases/") {
+                authentication(userName: "${nexus_username}", password: "${nexus_password}")
             }
+            pom.version = "$project.version"
+            pom.artifactId = "mybatis-generator-gradle-plugin"
+            pom.groupId = "$project.group"
         }
     }
 }
-
-//uploadArchives {
-//    repositories {
-//        mavenDeployer {
-//            configuration = configurations.deployerJars
-//            snapshotRepository(url: "http://192.168.66.9:8081/nexus/repository/maven-snapshots/") {
-//                authentication(userName: "admin", password: "admin123")
-//            }
-//            repository(url: "http://192.168.66.9:8081/nexus/repository/maven-releases/") {
-//                authentication(userName: "admin", password: "admin123")
-//            }
-//        }
-//    }
-//}
 
 
 dependencies {
@@ -110,4 +86,20 @@ dependencies {
     testCompile "org.slf4j:log4j-over-slf4j:1.7.25"
     testCompile "org.slf4j:jcl-over-slf4j:1.7.25"
     testCompile group: 'junit', name: 'junit', version: '4.12'
+}
+
+
+pluginBundle {
+    website = 'https://github.com/zhouxinghai/mybatis-generator-gradle-plugin.git/'
+    vcsUrl = 'https://github.com/zhouxinghai/mybatis-generator-gradle-plugin.git'
+    description = 'mybatis generator gradle plugin'
+    tags = ['mybatis', 'generator']
+
+
+    plugins {
+        mybatisGeneratorPlugin {
+            id = 'com.github.mybatis.generator'
+            displayName = 'mybatis generator gradle plugin'
+        }
+    }
 }
