@@ -8,7 +8,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import com.github.mybatis.generator.gradle.plugin.parse.ParserEntityResolver2;
 import org.apache.commons.lang3.StringUtils;
@@ -20,6 +22,7 @@ import org.mybatis.generator.config.xml.ParserErrorHandler;
 import org.mybatis.generator.exception.XMLParserException;
 import org.mybatis.generator.internal.DefaultShellCallback;
 import org.mybatis.generator.internal.util.JavaBeansUtil;
+import org.mybatis.generator.plugins.SerializablePlugin;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -181,48 +184,22 @@ public class CodeGenerator {
                 context.setCommentGeneratorConfiguration(commentGeneratorConfiguration);
             }
 
-            PluginConfiguration pluginConfiguration = new PluginConfiguration();
-            pluginConfiguration.setConfigurationType(RemoveBLOBsPlugin.class.getName());
-            context.addPluginConfiguration(pluginConfiguration);
+            context.addPluginConfiguration(PluginConfigurationBuilder.getInstance(BlobsToStringPlugin.class).build());
+            //context.addPluginConfiguration(PluginConfigurationBuilder.getInstance(RemoveBLOBsPlugin.class).build());
 
-            pluginConfiguration = new PluginConfiguration();
-            pluginConfiguration.setConfigurationType(SqlMapPlugin.class.getName());
-            pluginConfiguration.addProperty("isMergeable", "false");
-            context.addPluginConfiguration(pluginConfiguration);
+            context.addPluginConfiguration(PluginConfigurationBuilder.getInstance(SqlMapPlugin.class).addProperty("isMergeable", "false").build());
 
-            pluginConfiguration = new PluginConfiguration();
-            pluginConfiguration.setConfigurationType("org.mybatis.generator.plugins.SerializablePlugin");
-            pluginConfiguration.addProperty("suppressJavaInterface", "false");
-            context.addPluginConfiguration(pluginConfiguration);
+            context.addPluginConfiguration(
+                    PluginConfigurationBuilder.getInstance(SerializablePlugin.class).addProperty("suppressJavaInterface", "false").build());
 
-            pluginConfiguration = new PluginConfiguration();
-            pluginConfiguration.setConfigurationType(CommentPlugin.class.getName());
-            context.addPluginConfiguration(pluginConfiguration);
-
-            pluginConfiguration = new PluginConfiguration();
-            pluginConfiguration.setConfigurationType(ModelExamplePlugin.class.getName());
-            context.addPluginConfiguration(pluginConfiguration);
-
-            pluginConfiguration = new PluginConfiguration();
-            pluginConfiguration.setConfigurationType(MySqlPagePlugin.class.getName());
-            context.addPluginConfiguration(pluginConfiguration);
-
-            pluginConfiguration = new PluginConfiguration();
-            pluginConfiguration.setConfigurationType(PostfixPlugin.class.getName());
-            context.addPluginConfiguration(pluginConfiguration);
-
-            pluginConfiguration = new PluginConfiguration();
-            pluginConfiguration.setConfigurationType(NumberLikePlugin.class.getName());
-            context.addPluginConfiguration(pluginConfiguration);
-
-            pluginConfiguration = new PluginConfiguration();
-            pluginConfiguration.setConfigurationType(BatchInsertPlugin.class.getName());
-            context.addPluginConfiguration(pluginConfiguration);
-
-            pluginConfiguration = new PluginConfiguration();
-            pluginConfiguration.setConfigurationType(MethodFilterPlugin.class.getName());
-            pluginConfiguration.addProperty("exclude", "{\"link_queue\":[\"insert\",\"updateByExample\",\"updateByPrimaryKey\"]}");
-            context.addPluginConfiguration(pluginConfiguration);
+            context.addPluginConfiguration(PluginConfigurationBuilder.getInstance(CommentPlugin.class).build());
+            context.addPluginConfiguration(PluginConfigurationBuilder.getInstance(ModelExamplePlugin.class).build());
+            context.addPluginConfiguration(PluginConfigurationBuilder.getInstance(MySqlPagePlugin.class).build());
+            context.addPluginConfiguration(PluginConfigurationBuilder.getInstance(PostfixPlugin.class).build());
+            context.addPluginConfiguration(PluginConfigurationBuilder.getInstance(NumberLikePlugin.class).build());
+            context.addPluginConfiguration(PluginConfigurationBuilder.getInstance(BatchInsertPlugin.class).build());
+            context.addPluginConfiguration(PluginConfigurationBuilder.getInstance(MethodFilterPlugin.class)
+                    .addProperty("exclude", "{\"link_queue\":[\"insert\",\"updateByExample\",\"updateByPrimaryKey\"]}").build());
 
             List<TableConfiguration> tcList = context.getTableConfigurations();
             if (null == tcList || tcList.isEmpty()) {
@@ -295,6 +272,34 @@ public class CodeGenerator {
             parseErrors.add(e.getMessage());
             throw new XMLParserException(parseErrors);
         }
+    }
+
+    public static class PluginConfigurationBuilder {
+
+        private Class               pluginClass;
+
+        private Map<String, String> properties = new HashMap<>();
+
+        private PluginConfigurationBuilder(Class pluginClass) {
+            this.pluginClass = pluginClass;
+        }
+
+        public static PluginConfigurationBuilder getInstance(Class pluginClass) {
+            return new PluginConfigurationBuilder(pluginClass);
+        }
+
+        public PluginConfigurationBuilder addProperty(String name, Object value) {
+            properties.put(name, value.toString());
+            return this;
+        }
+
+        public PluginConfiguration build() {
+            PluginConfiguration pluginConfiguration = new PluginConfiguration();
+            pluginConfiguration.setConfigurationType(pluginClass.getName());
+            properties.forEach((k, v) -> pluginConfiguration.addProperty(k, v));
+            return pluginConfiguration;
+        }
+
     }
 
 }
