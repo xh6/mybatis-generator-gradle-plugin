@@ -19,6 +19,7 @@ import org.mybatis.generator.config.xml.MyBatisGeneratorConfigurationParser;
 import org.mybatis.generator.config.xml.ParserErrorHandler;
 import org.mybatis.generator.exception.XMLParserException;
 import org.mybatis.generator.internal.DefaultShellCallback;
+import org.mybatis.generator.internal.util.JavaBeansUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -222,6 +223,24 @@ public class CodeGenerator {
             pluginConfiguration.setConfigurationType(MethodFilterPlugin.class.getName());
             pluginConfiguration.addProperty("exclude", "{\"link_queue\":[\"insert\",\"updateByExample\",\"updateByPrimaryKey\"]}");
             context.addPluginConfiguration(pluginConfiguration);
+
+            List<TableConfiguration> tcList = context.getTableConfigurations();
+            if (null == tcList || tcList.isEmpty()) {
+                continue;
+            }
+            tcList.forEach(tc -> {
+                String tableName = tc.getTableName();
+                String domainObjectName = tc.getDomainObjectName();
+                if (StringUtils.isBlank(domainObjectName)) {
+                    domainObjectName = JavaBeansUtil.getCamelCaseString(tableName, true) + "DO";
+                    tc.setDomainObjectName(domainObjectName);
+                }
+                String mapperName = tc.getMapperName();
+                if (StringUtils.isBlank(mapperName)) {
+                    mapperName = JavaBeansUtil.getCamelCaseString(tableName, true) + "Mapper";
+                    tc.setMapperName(mapperName);
+                }
+            });
 
         }
 
