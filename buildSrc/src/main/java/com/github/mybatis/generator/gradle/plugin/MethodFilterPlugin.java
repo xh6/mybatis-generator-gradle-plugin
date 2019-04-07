@@ -2,6 +2,7 @@ package com.github.mybatis.generator.gradle.plugin;
 
 import java.lang.reflect.Field;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
@@ -19,9 +20,9 @@ import org.mybatis.generator.api.dom.xml.XmlElement;
  */
 public class MethodFilterPlugin extends PluginAdapter {
 
-    private              Map<String, List<String>> excludes     = null;
-
     private static final List<String>              xmlNodeNames = Arrays.asList("select", "delete", "insert", "update");
+
+    private              Map<String, List<String>> excludes     = new ConcurrentHashMap<>();
 
     public boolean validate(List<String> warnings) {
         return true;
@@ -36,6 +37,7 @@ public class MethodFilterPlugin extends PluginAdapter {
 
     @Override
     public boolean sqlMapDocumentGenerated(Document document, IntrospectedTable introspectedTable) {
+        String tableName = introspectedTable.getTableConfiguration().getTableName();
         XmlElement parentElement = document.getRootElement();
         Iterator<Element> iterator = parentElement.getElements().iterator();
         while (iterator.hasNext()) {
@@ -43,7 +45,7 @@ public class MethodFilterPlugin extends PluginAdapter {
             if (xmlNodeNames.contains(xmlElement.getName())) {
                 for (Attribute attribute : xmlElement.getAttributes()) {
                     if (attribute.getName().equals("id")) {
-                        if (excludes.get(introspectedTable.getTableConfiguration().getTableName()).contains(attribute.getValue())) {
+                        if (null != excludes && excludes.containsKey(tableName) && excludes.get(tableName).contains(attribute.getValue())) {
                             iterator.remove();
                         }
                         break;
@@ -56,12 +58,13 @@ public class MethodFilterPlugin extends PluginAdapter {
 
     @Override
     public boolean clientGenerated(Interface interfaze, TopLevelClass topLevelClass, IntrospectedTable introspectedTable) {
+        String tableName = introspectedTable.getTableConfiguration().getTableName();
         Iterator<Method> iterator = interfaze.getMethods().iterator();
         boolean haseExample = false;
         while (iterator.hasNext()) {
             Method method = iterator.next();
             //executeParamter(method, introspectedTable);
-            if (excludes.get(introspectedTable.getTableConfiguration().getTableName()).contains(method.getName())) {
+            if (null != excludes && excludes.containsKey(tableName) && excludes.get(tableName).contains(method.getName())) {
                 iterator.remove();
                 continue;
             }

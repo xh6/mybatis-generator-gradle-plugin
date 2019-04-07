@@ -181,6 +181,10 @@ public class CodeGenerator {
             }
 
             PluginConfiguration pluginConfiguration = new PluginConfiguration();
+            pluginConfiguration.setConfigurationType(RemoveBLOBsPlugin.class.getName());
+            context.addPluginConfiguration(pluginConfiguration);
+
+            pluginConfiguration = new PluginConfiguration();
             pluginConfiguration.setConfigurationType(SqlMapPlugin.class.getName());
             pluginConfiguration.addProperty("isMergeable", "false");
             context.addPluginConfiguration(pluginConfiguration);
