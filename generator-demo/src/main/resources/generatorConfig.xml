@@ -15,7 +15,7 @@
         <property name="domain.package" value="liangzhu.info.spider.mysql.domain"/>
 
         <!--Url队列-->
-        <table tableName="page" >
+        <table tableName="page">
             <generatedKey column="id" sqlStatement="MySql" identity="true"/>
         </table>
 
